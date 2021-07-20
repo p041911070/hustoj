@@ -19,8 +19,11 @@ if grep "client_max_body_size" /etc/nginx/nginx.conf ; then
 else
 	sed -i "s:include /etc/nginx/mime.types;:client_max_body_size    1024m;\n\tinclude /etc/nginx/mime.types;:g" /etc/nginx/nginx.conf
 fi
+/etc/init.d/nginx restart
 # pym nginx end
 # pym php start 修改上传文件限制
 sed -i "s/post_max_size = 8M/post_max_size = 500M/g" /etc/php/7.2/fpm/php.ini
 sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 500M/g" /etc/php/7.2/fpm/php.ini
+/etc/init.d/php7.2-fpm restart
+service php7.2-fpm restart
 # pym end
