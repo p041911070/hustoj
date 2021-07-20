@@ -13,17 +13,11 @@ chown -R www-data:www-data /home/judge/src/web
 cp /home/judge/src/install/default.conf  /etc/nginx/sites-available/default
 sed -i "s#127.0.0.1:9000#unix:/var/run/php/php7.2-fpm.sock#g"    /etc/nginx/sites-available/default
 
+
 # pym nginx start 添加docker中，nginx上传题库的大小限制
-if grep "client_max_body_size" /etc/nginx/nginx.conf ; then 
-	echo "client_max_body_size already added" ;
-else
-	sed -i "s:include /etc/nginx/mime.types;:client_max_body_size    500M;\n\tinclude /etc/nginx/mime.types;:g" /etc/nginx/nginx.conf
-fi
-/etc/init.d/nginx restart
+sed -i "s/client_max_body_size        80m;/client_max_body_size        1024m;/g" /etc/nginx/sites-available/default
 # pym nginx end
 # pym php start 修改上传文件限制
-sed -i "s/post_max_size = 8M/post_max_size = 500M/g" /etc/php/7.2/fpm/php.ini
-sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 500M/g" /etc/php/7.2/fpm/php.ini
-/etc/init.d/php7.2-fpm restart
-service php7.2-fpm restart
+sed -i "s/post_max_size = 8M/post_max_size = 1024M/g" /etc/php/7.2/fpm/php.ini
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 1024M/g" /etc/php/7.2/fpm/php.ini
 # pym end
