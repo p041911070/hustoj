@@ -21,6 +21,6 @@ else
 fi
 # pym nginx end
 # pym php start 修改上传文件限制
-sed -i "s/post_max_size = 8M/post_max_size = 80M/g" /etc/php/7.2/fpm/php.ini
-sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 80M/g" /etc/php/7.2/fpm/php.ini
+sed -i "s/post_max_size = 8M/post_max_size = 500M/g" /etc/php/7.2/fpm/php.ini
+sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 500M/g" /etc/php/7.2/fpm/php.ini
 # pym end
