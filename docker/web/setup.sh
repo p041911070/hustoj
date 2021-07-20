@@ -17,7 +17,7 @@ sed -i "s#127.0.0.1:9000#unix:/var/run/php/php7.2-fpm.sock#g"    /etc/nginx/site
 if grep "client_max_body_size" /etc/nginx/nginx.conf ; then 
 	echo "client_max_body_size already added" ;
 else
-	sed -i "s:include /etc/nginx/mime.types;:client_max_body_size    1024m;\n\tinclude /etc/nginx/mime.types;:g" /etc/nginx/nginx.conf
+	sed -i "s:include /etc/nginx/mime.types;:client_max_body_size    500M;\n\tinclude /etc/nginx/mime.types;:g" /etc/nginx/nginx.conf
 fi
 /etc/init.d/nginx restart
 # pym nginx end
