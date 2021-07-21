@@ -14,6 +14,9 @@ RUN bash /opt/sources.list.sh &&\
         flex \
         gcc \
         g++ \
+        python \
+        python3 \
+	    mono-devel \
         openjdk-11-jdk
 
 COPY trunk /trunk
